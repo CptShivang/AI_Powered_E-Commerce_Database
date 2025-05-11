@@ -56,6 +56,13 @@ AI\_Powered\_E-Commerce\_Database/
 │   ├── checkout.html
 │   └── orders.html
 └── README.md
+└── .env(need to make by self)
+
+contents of .env
+MYSQL_HOST= HOST 
+MYSQL_USER= USER
+MYSQL_PASSWORD= PASSWORD
+MYSQL_DATABASE= DATABASE
 
 2. **Install dependencies**
 
