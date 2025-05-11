@@ -28,8 +28,6 @@ mysql = MySQL(app)
 
 #Shows login page
 @app.route('/')
-def login_page():
-    return render_template('login.html')
 @app.route('/login')
 def login_page_alias():
     return render_template('login.html')
