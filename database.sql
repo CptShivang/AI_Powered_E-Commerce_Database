@@ -67,11 +67,11 @@ CREATE TABLE cart (
 
 -- Insert sample data (15 products)
 INSERT INTO products (name, description, price, category, stock_quantity, image_url) VALUES
-('Smartphone X', 'Latest smartphone with AI camera', 799.99, 'Electronics', 50, 'https://example.com/phone.jpg'),
-('Wireless Earbuds', 'Noise cancelling wireless earbuds', 129.99, 'Electronics', 100, 'https://example.com/earbuds.jpg'),
-('Smart Watch', 'Fitness tracking and notifications', 199.99, 'Electronics', 30, 'https://example.com/watch.jpg'),
-('Laptop Pro', 'High performance laptop for professionals', 1299.99, 'Electronics', 20, 'https://example.com/laptop.jpg'),
-('Bluetooth Speaker', 'Portable speaker with 20h battery', 79.99, 'Electronics', 75, 'https://example.com/speaker.jpg'),
+('Smartphone X', 'Latest smartphone with AI camera', 799.99, 'Electronics', 50, 'Smartphone_X.jpg','Smartphone_X.jpg'),
+('Wireless Earbuds', 'Noise cancelling wireless earbuds', 129.99, 'Electronics', 100, 'wireless_earbuds.jpg', 'wireless_earbuds.jpg'),
+('Smart Watch', 'Fitness tracking and notifications', 199.99, 'Electronics', 30, 'smartwatch.jpg','smartwatch.jpg'),
+('Laptop Pro', 'High performance laptop for professionals', 1299.99, 'Electronics', 20, 'laptop_pro.jpg','laptop_pro.jpg'),
+('Bluetooth Speaker', 'Portable speaker with 20h battery', 79.99, 'Electronics', 75, 'Bluetooth_Speaker.jpg','Bluetooth_Speaker.jpg'),
 ('Coffee Maker', 'Automatic coffee maker with timer', 59.99, 'Home', 40, 'https://example.com/coffee.jpg'),
 ('Air Fryer', 'Healthy cooking with little oil', 89.99, 'Home', 35, 'https://example.com/airfryer.jpg'),
 ('Yoga Mat', 'Non-slip premium yoga mat', 29.99, 'Sports', 60, 'https://example.com/yogamat.jpg'),
