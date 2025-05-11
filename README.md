@@ -38,7 +38,6 @@ This project is a Flask-based web application that simulates an e-commerce platf
 ## 📁 Project Structure
 
 ```
-## Structure of the file
 
 AI\_Powered\_E-Commerce\_Database/
 ├── app.py
@@ -102,5 +101,4 @@ This project is open-source and available under the MIT License.
 **Shivang Shukla**
 [GitHub Profile](https://github.com/CptShivang)
 
-```
 
