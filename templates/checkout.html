@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+
+<section class="checkout-wrapper">
+  <a href="/customer" class="button back-button">← Back to Store</a>
+  <h2>Review Your Order</h2>
+
+  <table class="checkout-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody id="checkout-items"></tbody>
+  </table>
+
+  <div class="checkout-summary">
+    <strong>Total: $<span id="checkout-total">0.00</span></strong>
+    <button id="place-order-button" class="button checkout-final">Place Order</button>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const res = await fetch('/cart');
+    const items = await res.json();
+    const table = document.getElementById('checkout-items');
+    let total = 0;
+  
+    items.forEach(item => {
+      const subtotal = item.price * item.quantity;
+      total += subtotal;
+  
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td>${item.quantity}</td>
+        <td>$${item.price.toFixed(2)}</td>
+        <td>$${subtotal.toFixed(2)}</td>
+      `;
+      table.appendChild(row);
+    });
+  
+    document.getElementById('checkout-total').textContent = total.toFixed(2);
+  
+    // ✅ FIXED: Click event goes directly here
+    const placeOrderBtn = document.getElementById('place-order-button');
+    if (placeOrderBtn) {
+      placeOrderBtn.addEventListener('click', async () => {
+        try {
+          const res = await fetch('/cart/checkout', { method: 'POST' });
+          const data = await res.json();
+  
+          if (res.ok) {
+            console.log("Redirecting to order summary...");
+            window.location.href = `/order-summary/${data.order_id}`;
+          } else {
+            alert(data.error || 'Checkout failed.');
+          }
+        } catch (err) {
+          console.error('Checkout error:', err);
+          alert('Something went wrong.');
+        }
+      });
+    }
+  });
+  </script>
+  
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Order Summary{% endblock %}
+{% block content %}
+
+<div class="order-summary-container">
+  <div class="order-card">
+    <h2>✅ Thank you for your purchase!</h2>
+    <p><strong>Order ID:</strong> {{ order[0] }}</p>
+    <p><strong>Date:</strong> {{ order[1] }}</p>
+    <p><strong>Total Amount:</strong> ${{ '%.2f'|format(order[2]) }}</p>
+    <p><strong>Status:</strong> <span class="status">{{ order[3] }}</span></p>
+
+    <div class="order-summary-buttons">
+      <a href="/customer" class="button">← Back to Shop</a>
+      <a href="/orders" class="button secondary">📦 View All Orders</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

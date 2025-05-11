@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Past Orders{% endblock %}
+{% block content %}
+
+<div class="orders-page">
+  <h2>🧾 Your Past Orders</h2>
+
+  {% if orders %}
+  <table class="orders-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Total ($)</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order[0] }}</td>
+        <td>{{ order[1] }}</td>
+        <td>{{ '%.2f'|format(order[2]) }}</td>
+        <td>{{ order[3] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>You have no past orders yet.</p>
+  {% endif %}
+
+  <a href="/customer" class="button">← Back to Store</a>
+</div>
+
+{% endblock %}

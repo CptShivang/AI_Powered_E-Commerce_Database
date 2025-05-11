@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Customer Dashboard{% endblock %}
+{% block content %}
+
+<!-- Cart Toggle Button -->
+<button id="toggle-cart" class="cart-toggle">🛒 Cart</button>
+
+<!-- 🛒 Cart Sidebar -->
+<aside id="cart-sidebar" class="collapsed">
+    <h3>Your Cart</h3>
+    <ul id="cart-preview-list" class="cart-list"></ul>
+    <div class="cart-footer">
+      <p class="cart-total">Total: $<span id="cart-preview-total">0.00</span></p>
+      <a href="/checkout" class="button checkout-button">🛒 Go to Checkout</a>
+      <a href="/orders" class="button">My Orders</a>
+    </div>
+    
+</aside>
+
+<!-- Product Area -->
+<main>
+    <section id="products">
+        <h2>Our Products</h2>
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be loaded here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Product Detail View -->
+    <section id="product-detail" class="hidden">
+        <button id="back-to-products">← Back to Products</button>
+        <div class="product-detail-container">
+            <div class="product-image">
+                <img id="detail-image_url" src="https://via.placeholder.com/300" alt="Product Image" loading="lazy">
+            </div>
+            <div class="product-info">
+                <h2 id="detail-name"></h2>
+                <p class="price" id="detail-price"></p>
+                <p class="category" id="detail-category"></p>
+                <p id="detail-description"></p>
+                <p class="stock" id="detail-stock"></p>
+
+                <h3>AI Recommendations</h3>
+                <div class="recommendations" id="recommendations">
+                    <!-- Recommendations will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Script -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+{% endblock %}

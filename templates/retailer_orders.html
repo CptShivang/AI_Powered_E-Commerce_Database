@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Manage Orders{% endblock %}
+{% block content %}
+
+<div class="orders-page">
+  <h2>🛠️ Retailer Order Management</h2>
+
+  <table class="orders-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Date</th>
+        <th>Total ($)</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order[0] }}</td>
+        <td>{{ order[1] }}</td>
+        <td>{{ order[2] }}</td>
+        <td>{{ '%.2f'|format(order[3]) }}</td>
+        <td>
+          <form action="/retailer/orders/update/{{ order[0] }}" method="POST" style="display: inline-block;">
+            <select name="status" onchange="this.form.submit()">
+              <option value="Pending" {% if order[4] == 'Pending' %}selected{% endif %}>Pending</option>
+              <option value="Shipped" {% if order[4] == 'Shipped' %}selected{% endif %}>Shipped</option>
+              <option value="Delivered" {% if order[4] == 'Delivered' %}selected{% endif %}>Delivered</option>
+            </select>
+          </form>
+        </td>
+        <td>
+          <form action="/retailer/orders/delete/{{ order[0] }}" method="POST" onsubmit="return confirm('Delete this order?')">
+            <button type="submit" class="button danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

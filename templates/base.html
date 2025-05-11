@@ -1,0 +1,32 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}AI-Powered E-Commerce{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+{% if session.get('role') == 'retailer' %}
+<nav class="retailer-nav">
+  <a href="/retailer" class="{% if request.path == '/retailer' %}active{% endif %}">🏠 Dashboard</a>
+  <a href="/retailer/orders" class="{% if request.path.startswith('/retailer/orders') %}active{% endif %}">📦 Orders</a>
+  <a href="/retailer/add-product" class="{% if request.path.startswith('/retailer/add-product') %}active{% endif %}">➕ Add Product</a>
+</nav>
+{% endif %}
+<body>
+  <header class="site-header">
+    <h1>AI-Powered E-Commerce DBMS</h1>
+    <div class="logout-button">
+        <a href="/logout">Logout</a>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>MINI-PROJECT NIET - 2025</p>
+  </footer>
+</body>
+</html>

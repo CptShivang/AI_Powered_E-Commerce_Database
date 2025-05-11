@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+  <main class="auth-container">
+    <h2>Register</h2>
+    <form id="register-form">
+      <input type="text" id="name" placeholder="Full Name" required><br>
+      <input type="email" id="email" placeholder="Email" required><br>
+      <input type="password" id="password" placeholder="Password" required><br>
+      <select id="role" required>
+        <option value="">Select Role</option>
+        <option value="customer">Customer</option>
+        <option value="retailer">Retailer</option>
+      </select><br>
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="/">Login here</a></p>
+  </main>
+
+  <script>
+    document.getElementById('register-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const user = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        role: document.getElementById('role').value
+      };
+
+      const res = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        alert('Registered successfully!');
+        window.location.href = '/';
+      } else {
+        alert(result.error || 'Failed to register.');
+      }
+    });
+  </script>
+
+{% endblock %}

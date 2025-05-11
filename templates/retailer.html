@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Retailer Dashboard{% endblock %}
+{% block content %}
+
+  <section id="retailer-products">
+    <h2>Your Products</h2>
+    <div id="retailer-product-grid" class="product-grid"></div>
+  </section>
+  <section id="retailer-products" style="padding: 1rem 2rem;">
+
+  <script>
+    const backend = '';
+
+    async function fetchAPI(url, options = {}) {
+      const response = await fetch(url, options);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      return await response.json();
+    }
+
+    async function loadRetailerProducts() {
+      const products = await fetchAPI(`${backend}/products`);
+      const grid = document.getElementById('retailer-product-grid');
+      grid.innerHTML = '';
+
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+
+        card.innerHTML = `
+          <div class="product-info">
+            <img src="/static/images/${product.thumb_url}" alt="${product.name}" class="product-thumb" />
+            <input type="text" value="${product.name}" id="name-${product.id}" />
+            <input type="number" value="${product.price}" step="0.01" id="price-${product.id}" />
+            <textarea id="desc-${product.id}" placeholder="Description">${product.description}</textarea>
+            <input type="number" value="${product.stock_quantity}" id="stock-${product.id}" />
+            <button onclick="updateProduct(${product.id})">Update</button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    async function updateProduct(productId) {
+      const updated = {
+        name: document.getElementById(`name-${productId}`).value,
+        price: parseFloat(document.getElementById(`price-${productId}`).value),
+        description: document.getElementById(`desc-${productId}`).value,
+        stock_quantity: parseInt(document.getElementById(`stock-${productId}`).value)
+      };
+
+      try {
+        await fetchAPI(`/update-product/${productId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated)
+        });
+        alert('Product updated!');
+        loadRetailerProducts();
+      } catch (err) {
+        console.error(err);
+        alert('Failed to update product');
+      }
+    }
+
+    loadRetailerProducts();
+  </script>
+
+{% endblock %}

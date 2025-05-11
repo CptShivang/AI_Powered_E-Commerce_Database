@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+  <main class="auth-container">
+    <h2>Login</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Email" required><br>
+      <input type="password" id="password" placeholder="Password" required><br>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/register">Register here</a></p>
+  </main>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const credentials = {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+      };
+
+      const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert('Login successful!');
+        window.location.href = result.role === 'retailer' ? '/retailer' : '/customer';
+      } else {
+        alert(result.error || 'Login failed');
+      }
+    });
+  </script>
+
+{% endblock %}

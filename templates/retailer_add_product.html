@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Add Product{% endblock %}
+{% block content %}
+
+  <section id="add-product-section">
+    <h2>Add New Product</h2>
+    <form id="retailer-add-form" class="styled-form" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Product Name" required />
+      <textarea name="description" placeholder="Description" required></textarea>
+      <input type="number" name="price" placeholder="Price" step="0.01" required />
+      <input type="text" name="category" placeholder="Category" required />
+      <input type="number" name="stock_quantity" placeholder="Stock" required />
+      <input type="file" name="image" accept="image/*" required />
+      <button type="submit">Add Product</button>
+    </form>    
+  </section>
+
+  <script>
+    document.getElementById('retailer-add-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('/upload-product', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Failed to add product');
+
+        alert('Product added!');
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        alert('Failed to add product');
+      }
+    });
+  </script>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+mini-project/
+├── app.py
+├── templates/
+│   ├── login.html
+│   ├── register.html
+│   ├── customer.html
+│   ├── retailer.html
+│   ├── base.html
+│   ├── checkout.html
+│   ├── retailer_orders.html
+│   ├── order_summary.html
+│   ├── retailer_add_product.html
+│   ├── orders.html
+├── static/
+│   │   ├──images
+│   │   │   ├──thumbnails
+│   ├── styles.css
+│   ├── script.js
+├── .env
+├── ai_recommendations.py
+├── database.sql
