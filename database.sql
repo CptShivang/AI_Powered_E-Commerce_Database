@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS products (
     category VARCHAR(50),
     stock_quantity INT NOT NULL,
     image_url VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    thumb_url VARCHAR(255)
 );
 
 -- Users table
